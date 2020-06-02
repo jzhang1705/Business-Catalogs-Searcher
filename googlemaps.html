@@ -24,9 +24,19 @@
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 38.7984563, lng: -76.8693817},
+          //Washington D.C.
+          center: {lat: 38.904559, lng: -77.0419403},
           zoom: 10
         });
+        var label = "0"
+        var marker = new google.maps.Marker({
+          animation: google.maps.Animation.DROP,
+          position: {lat: 38.904559, lng: -77.0419403},
+          title: 'Number of Restaurants',
+          label: label
+        });
+        marker.setMap(map)
+        marker.setMap(null)
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiJHQDiRfl_Na0fKUY4zIFQ2v3CH5M_rY&callback=initMap"
