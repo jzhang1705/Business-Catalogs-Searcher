@@ -61,6 +61,17 @@
           <h5>The Business Catalog</h5>
           <p>Description and instructions</p>
           <button type="button" name="button" class="btn bg-dark" style="color:white">Learn More</button>
+
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn bg-dark" style="color:white" type="submit" onclick="mapSearch()">Search</button>
+          </form>
+          <script>
+            var result;
+            function mapSearch() {
+              result = https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAiJHQDiRfl_Na0fKUY4zIFQ2v3CH5M_rY
+            }
+          </script>
         </div>
       </div>
     </div>
