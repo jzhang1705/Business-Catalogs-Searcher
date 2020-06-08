@@ -46,10 +46,26 @@
 
 <div style="padding-left:10px">
   <h2>Create Your Own Business Catalog</h2>
-  Type of Business:<input type="text" name="FirstName" placeholder = "Enter your type of business here" value=""><br>
-  Description: 
+  <form action="/action_page.php">
+    <label for="cars">Business Type:</label>
+    <select name="cars" id="cars">
+      <option value="Business Services">Business Services</option>
+      <option value="Distributor">Distributor (Finished Goods)</option>
+      <option value="Food Service">Food Service</option>
+      <option value="Health Practioner">Health Practitioner</option>
+      <option value="Investor">Investor</option>
+      <option value="Manufacturer">Manufacturer</option>
+      <option value="Retailer">Retailer</option>
+      <option value="Retailer">Retailer</option>
+      <option value="Supplier/Raw Ingredient Distributor">Supplier/Raw Ingredient Distributor</option> 
+      <option value="Other">Other</option> 
+    </select>
+    <br> Other: <input type="text" name="Other" placeholder = "Other Business Type" value=""><br>
+
+  <p> Business Description: </p> 
   <textarea rows="4" cols="50" name="comment" form="usrform"></textarea>
-  <input type="submit">
+  </form>
+  
 </div>
 
 <div style="padding-left:10px">
