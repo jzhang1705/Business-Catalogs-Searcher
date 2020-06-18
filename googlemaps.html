@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Business Catalog Searcher Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      var geocoder;
+      function initMap() {
+        geocoder = new google.maps.Geocoder();
+        var latlng= new google.maps.LatLng(38.904559, -77.0419403);
+        var mapOptions = {
+          zoom: 10,
+          center: latlng
+        }
+      map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        codeAddress();
+      }
+        function codeAddress() {
+          var image = {
+            url:'https://i.ya-webdesign.com/images/food-icon-png-8.png',
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(0, 0),
+            scaledSize: new google.maps.Size(25, 25)
+          };
+          var markers = [];
+          var address = ['Reston, VA']
+          address.push('Herndon, VA');
+          address.push('San Francisco, CA')
+          address.push('San Jose, CA')
+          const markerClusterer = new MarkerClusterer(map, [], {
+            imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+            maxZoom: 5
+          });
+          var bounds = new google.maps.LatLngBounds();
+          for (i = 0; i < address.length; i++) {
+            geocoder.geocode({
+              'address': address[i]
+            }, function(results, status) {
+              if (status == 'OK') {
+                var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location,
+                  icon: image
+                });
+                markers.push(marker);
+                bounds.extend(marker.getPosition());
+                map.fitBounds(bounds);
+                markerClusterer.addMarker(marker);
+              } else {
+                alert('Geocoding did not work' + status);
+              }
+            });
+          }
+        }
+
+      /*var coordinates = [];
+      var address = [];
+      address.push('1072 Downshire Chase, Virginia Beach, VA');
+      address.push('292 Golden Star Rd.Ladson, SC 29456')
+      address.push('224 East Bayberry St.Reston, VA 20191')
+      for(i = 0; i < address.length; i++){
+        geocoder.geocode( { 'address': address[i]}, function(results, status){
+          if(status == 'OK'){
+            coordinates.push(results[0].geometry.location);
+          }
+        });
+        }
+        var markers = coordinates.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location
+          });
+        });
+      }*/
+  </script>
+  <div id="map"></div>
+  <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+  <!-- Replace the value of the key parameter with your own API key. -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiJHQDiRfl_Na0fKUY4zIFQ2v3CH5M_rY&callback=initMap">
+  </script>
+  </html>
