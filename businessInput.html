@@ -20,6 +20,15 @@
         padding: 0px;
         overflow-x: hidden;
       }
+
+      #container{
+        position:relative;
+        padding-bottom: 50px
+      }
+      #buttons{
+        position:absolute;
+        bottom:0
+      }
     </style>
   </head>
 
@@ -34,7 +43,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="navbar-brand"><img class="rounded-circle" src="img/logo.png" alt="Logo" height="35px"></a>
-          <a class="navbar-brand" href="mainpage.html">Business Catalog</a>
+          <a class="navbar-brand" href="mainpage.html">Home</a>
         </li>
         <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Login/Signup</a></li>
@@ -72,40 +81,50 @@
     <html>
       <head>
           <script type='text/javascript'>
-              function addFields(){
-                  // Number of inputs to create
-                  var number = document.getElementById("member").value;
-                  // Container <div> where dynamic content will be placed
-                  var container = document.getElementById("container");
-                  // Clear previous contents of the container
-                  while (container.hasChildNodes()) {
-                      container.removeChild(container.lastChild);
+            function newElement() {
+                // Container <div> where dynamic content will be placed
+                var container = document.getElementById("container");
+                var textArea = document.createElement("textarea");
+                var paragraph = 
+                container.appendChild(document.createElement("br"));
+                for(i=0; i<3; i++){
+                  if( i < 2){
+                  if(i == 0){
+                    container.appendChild(document.createTextNode("Name:"));
+                  } else if (i == 1 ){
+                    container.appendChild(document.createTextNode("Price: "));
                   }
-                  for (i=0;i<2*number;i++){
-                      // Append a node with a random text
-                      if(i%2){
-                        container.appendChild(document.createTextNode("Name:"));
-                      } else{
-                        container.appendChild(document.createTextNode("Price:"));
-                      }
-                      // Create an <input> element, set its type and name attributes
-                      var input = document.createElement("input");
-                      input.type = "text";
-                      input.name = "member" + i;
-                      container.appendChild(input);
-                      // Append a line break 
-                      container.appendChild(document.createElement("br"));
-                  }
-              }
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "member" + i;
+                container.appendChild(input);
+                if(i == 0){
+                  //Sets the placeholder for the "Name: " text
+                  input.placeholder = "Product Name";
+                } else{
+                  //Sets the placeholder for the "Price: " text
+                  input.placeholder = "Product Price";
+                }
+                // Append a line break 
+                container.appendChild(document.createElement("br"));
+            } else {
+
+            }
+          }
+          }
           </script>
       </head>
       <body>
-          Enter the number of products: <input type="text" id="member" name="member" value=""><br />
-          <a href="#" id="filldetails" onclick="addFields()">Ok</a>
+          Name: <input type="text" id="member" name="member" value="" placeholder = "Product Name"><br>
+          Price: &nbsp;<input type="text" id="member" name="member" value="" placeholder = "Product Price"><br>
           <div id="container">
       </body>
+      <div id="buttons">
+      <input type="button" id="btnAdd" value="Add item" onclick= "newElement()">
       </html>
-    <input type="submit">
+    <input type="submit" id = "btnSubmit">
+  </div>
 </div>
 
 </body>
