@@ -1,0 +1,28 @@
+{
+  "name": "business-catalogs-searcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jzhang1705/Business-Catalogs-Searcher.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jzhang1705/Business-Catalogs-Searcher/issues"
+  },
+  "homepage": "https://github.com/jzhang1705/Business-Catalogs-Searcher#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "connect-mongo": "^3.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.25"
+  }
+}

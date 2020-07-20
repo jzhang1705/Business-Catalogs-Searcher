@@ -24,6 +24,13 @@ headers: {
 const req = https.request(options, (res) => {
 console.log(`statusCode: ${res.statusCode}`)
 
+fetch('http://localhost:3210/test/mongoDBWrite', { 
+  method: 'POST',
+  body: data
+ }).then(data => data.json()).then(data => {
+   console.log(data);
+ })
+
 res.on('data', (d) => {
 process.stdout.write(d)
 })
