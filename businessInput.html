@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Business Catalog</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon"/>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+
+      html {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+      }
+  
+      #container{
+        position:relative;
+        padding-bottom: 50px
+      }
+      #buttons{
+        position:absolute;
+        bottom:0
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="jumbotron jumbotron-fluid text-center" style="margin-bottom:0">
+      <img class="rounded-circle" height="100" width="130" src="img/logo.png" alt="Logo">
+      <h1>Business Catalog</h1>
+      <p>A unique way to view business products and competitors</p>
+    </div>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="navbar-brand"><img class="rounded-circle" src="img/logo.png" alt="Logo" height="35px"></a>
+          <a class="navbar-brand" href="mainpage.html">Home</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Login/Signup</a></li>
+      </ul>
+    </nav>
+
+<div style="padding-left:10px">
+</div>
+
+<div style="padding-left:10px">
+  <h2>Create Your Own Business Catalog</h2>
+  <form action="/action_page.php">
+    <label for="cars">Business Type:</label>
+    <select name="cars" id="cars">
+      <option value="Business Services">Business Services</option>
+      <option value="Distributor">Distributor (Finished Goods)</option>
+      <option value="Food Service">Food Service</option>
+      <option value="Health Practioner">Health Practitioner</option>
+      <option value="Investor">Investor</option>
+      <option value="Manufacturer">Manufacturer</option>
+      <option value="Retailer">Retailer</option>
+      <option value="Supplier/Raw Ingredient Distributor">Supplier/Raw Ingredient Distributor</option> 
+      <option value="Other">Other</option> 
+    </select>
+    <br> Other: <input type="text" name="Other" placeholder = "Other Business Type" value=""><br>
+
+  <p> Business Description: </p> 
+  <textarea rows="4" cols="50" name="comment" form="usrform" id = "businessDescription"></textarea>
+  </form>
+  
+</div>
+
+<div style="padding-left:10px">
+    <h2>Products</h2>
+    <html>
+      <head>
+        <script>
+          document.getElementById("container");
+          document.getElementById("price");
+        </script>
+        <script>
+          function newElement() {
+            // Container <div> where dynamic content will be placed
+            var container = document.getElementById("container");
+            var textArea = document.createElement("textarea");
+            var paragraph = 
+            container.appendChild(document.createElement("br"));
+            for(i=0; i<3; i++){
+              if( i < 2){
+              if(i == 0){
+                container.appendChild(document.createTextNode("Name:"));
+              } else if (i == 1 ){
+                container.appendChild(document.createTextNode("Price: "));
+              }
+            // Create an <input> element, set its type and name attributes
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = "member" + i;
+            container.appendChild(input);
+            if(i == 0){
+              //Sets the placeholder for the "Name: " text
+              input.placeholder = "Product Name";
+            } else{
+              //Sets the placeholder for the "Price: " text
+              input.placeholder = "Product Price";
+            }
+            // Append a line break 
+            container.appendChild(document.createElement("br"));
+          } else {
+          
+          }
+          }
+          }
+            //Don't touch this function
+          function insertDataBase(){
+            var businessType = document.getElementById("cars").value;
+            var businessDescription = document.getElementById("businessDescription").value;
+            var businessCatalog = document.getElementById("container").value;
+
+            console.log(businessCatalog);
+            
+            const data2 = {businessType, businessDescription, businessCatalog};
+            const options = {
+              method: 'POST',
+              headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data2)
+            };
+            fetch('/api2', options).then(response => {
+            console.log(response);
+            });
+          }
+        </script>
+      </head>
+      <body>
+          Name: <input type="text" id="name" name="member" value="" placeholder = "Product Name"><br>
+          Price: &nbsp;<input type="text" id="price" name="member" value="" placeholder = "Product Price"><br>
+          <div id="container">
+      </body>
+      <div id="buttons">
+      <input type="button" id="btnAdd" value="Add item" onclick= "newElement()">
+      </html>
+    <input type="submit" id = "btnSubmit" onclick = "insertDataBase()">
+  </div>
+</div>
+
+</body>
+</html>
