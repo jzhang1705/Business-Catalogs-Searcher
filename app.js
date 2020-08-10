@@ -53,6 +53,7 @@ app.listen(3210, function () {
 // POST method implementation:
 const express = require('express');
 const app = express();
+var bcrypt = require('bcrypt');
 var port = 3000;
 app.use(express.static(__dirname));
 app.use(express.json(
@@ -79,22 +80,25 @@ function insertData(data){
   const response = {statusCode: 200, body: JSON.stringify('Insert completed')};
 
   let atlas_connection_uri;
-  let cachedDb = null;
+  let cachedDb = null;         
+  
+  const context = null;
+  const callback = null;
+  
+  processEvent(data);
+  
 
-  exports.handler = (event, context, callback) => {
-          atlas_connection_uri = uri;
-          console.log('the Atlas connection string is ' + atlas_connection_uri);
-          processEvent(event, context, callback);
-  };
+  function processEvent(data) {
+      console.log('Calling MongoDB Atlas from AWS Lambda with event: ' + JSON.stringify(data));
+      var jsonContents = JSON.stringify(data);
+      atlas_connection_uri = uri;
+      console.log('the Atlas connection string is ' + atlas_connection_uri);
 
-  function processEvent(event, context, callback) {
-      console.log('Calling MongoDB Atlas from AWS Lambda with event: ' + JSON.stringify(event));
-      var jsonContents = JSON.parse(event.body);
       //Used for inserting into database
       MongoClient.connect(uri, function(err, db) {
       if (err) throw err;
           var dbo = db.db("BusinessCatalog");
-          console.log(event.body)
+          console.log(data.body)
           if(jsonContents.password !=null){
           }
           bcrypt
@@ -104,6 +108,7 @@ function insertData(data){
           return bcrypt.hash(jsonContents.password, salt);
           })
           .then(hash => {
+          //fix
           jsonContents.password = hash;
           dbo.collection("logins").insertOne(jsonContents, function(err, res) {
           if (err) throw err;
