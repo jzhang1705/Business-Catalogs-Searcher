@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Business Catalog</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon"/>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+
+      html {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+      }
+  
+      #container{
+        position:relative;
+        padding-bottom: 50px
+      }
+      #buttons{
+        position:absolute;
+        bottom:0
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="jumbotron jumbotron-fluid text-center" style="margin-bottom:0">
+      <img class="rounded-circle" height="100" width="130" src="img/logo.png" alt="Logo">
+      <h1>Business Catalog</h1>
+      <p>A unique way to view business products and competitors</p>
+    </div>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="navbar-brand"><img class="rounded-circle" src="img/logo.png" alt="Logo" height="35px"></a>
+          <a class="navbar-brand" href="mainpage.html">Home</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Login/Signup</a></li>
+      </ul>
+    </nav>
+
+<div style="padding-left:10px">
+</div>
+
+<div style="padding-left:10px">
+  <h2>Create Your Own Business Catalog</h2>
+  <form>
+    <div class="formBox">
+        <label for="businessType">Business Type:</label>
+        <select name="businessType" id="businessType">
+            <option value="Business Services">Business Services</option>
+            <option value="Distributor">Distributor (Finished Goods)</option>
+            <option value="Food Service">Food Service</option>
+            <option value="Health Practioner">Health Practitioner</option>
+            <option value="Investor">Investor</option>
+            <option value="Manufacturer">Manufacturer</option>
+            <option value="Retailer">Retailer</option>
+            <option value="Supplier/Raw Ingredient Distributor">Supplier/Raw Ingredient Distributor</option> 
+            <option value="Other">Other</option> 
+        </select>
+        <br> Other: <input type="text" name="businessType" placeholder = "Other Business Type" value="" id="businessTypeOther"><br>
+    </div>
+    <div class="formBox">
+        <p> Business Description: </p> 
+        <textarea rows="4" cols="50" name="businessDescription" form="usrform" id = "businessDescription"></textarea>
+    </div>
+    <div class="formBox">
+        <button id="btn">Submit</button>
+    </div>
+    <div id="msg">
+        <pre></pre>
+      </div>
+  </form>
+  <script>
+    const addBusiness = (ev)=>{
+        ev.preventDefault();  //to stop the form submitting
+        let business= {
+            businessType: document.getElementById('businessType').value,
+            businessDescription: document.getElementById('businessDescription').value
+        }
+        str1 = "Other"
+        if(business.businessType.localeCompare(str1) == 0){
+            business.businessType= document.getElementById('businessTypeOther').value
+        }
+        localStorage.setItem("Type", business.businessType);
+        localStorage.setItem("Description", business.businessDescription);
+        window.location.href = "BusinessProducts.html";
+
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+        document.getElementById('btn').addEventListener('click', addBusiness);
+    });
+</script>
+</div>
+
+<div style="padding-left:10px">
+
+
+</body>
+</html>

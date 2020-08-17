@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Business Catalog</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon"/>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+
+      html {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+      }
+
+      #container{
+        position:relative;
+        padding-bottom: 50px
+      }
+      #buttons{
+        position:absolute;
+        bottom:0
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="jumbotron jumbotron-fluid text-center" style="margin-bottom:0">
+      <img class="rounded-circle" height="100" width="130" src="img/logo.png" alt="Logo">
+      <h1>Business Catalog</h1>
+      <p>A unique way to view business products and competitors</p>
+    </div>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="navbar-brand"><img class="rounded-circle" src="img/logo.png" alt="Logo" height="35px"></a>
+          <a class="navbar-brand" href="mainpage.html">Home</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Login/Signup</a></li>
+      </ul>
+    </nav>
+
+<div style="padding-left:10px">
+</div>
+
+<div style="padding-left:10px">
+    <h2>Products</h2>
+    <form>
+      <div class="formBox">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Name"/>
+      </div>
+      <div class="formBox">
+          <label for="price">Price</label>
+          <input type="number" id="price" placeholder="Price"/>
+      </div>
+      <div class="formBox">
+          <button id="clickToAdd">Click to Add</button>
+      </div>
+      <div id="msg">
+          <pre></pre>
+      </div>
+  </form>
+  <script>
+      let products = [];
+      let priceName = new Map();
+      // example {id:1592304983049, name: 'Yo-yo', price: 17}
+      const addProduct = (ev)=>{
+          ev.preventDefault();  //to stop the form submitting
+          let product= {
+              id: Date.now(),
+              name: document.getElementById('name').value,
+              price: document.getElementById('price').value,
+              businessType: localStorage.getItem("Type"),
+              businessName: localStorage.getItem("Name"),
+              businessDescription: localStorage.getItem("Description")
+          }
+          priceName.set(product.name, product.price);
+          products.push(product);
+          document.forms[0].reset(); // to clear the form for the next entries
+          //document.querySelector('form').reset();
+
+          //for display purposes only
+          console.warn('added' , {products} );
+          let pre = document.querySelector('#msg pre');
+          pre.textContent = '\n' + JSON.stringify(products, '\t', 2);
+          
+          //saving to localStorage
+          localStorage.setItem('MyProductList', JSON.stringify(products) );
+      }
+      document.addEventListener('DOMContentLoaded', ()=>{
+          document.getElementById('clickToAdd').addEventListener('click', addProduct);
+      });
+  </script>
+</body>
+</html>
